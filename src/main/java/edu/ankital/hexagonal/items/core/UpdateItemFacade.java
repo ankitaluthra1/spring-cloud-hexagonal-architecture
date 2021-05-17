@@ -1,18 +1,17 @@
 package edu.ankital.hexagonal.items.core;
 
-import edu.ankital.hexagonal.items.core.ports.ItemDatabase;
-import edu.ankital.hexagonal.items.core.ports.UpdateItem;
 import edu.ankital.hexagonal.items.application.model.Item;
 import edu.ankital.hexagonal.items.application.model.ItemUpdateCommand;
-import org.springframework.beans.factory.annotation.Autowired;
+import edu.ankital.hexagonal.items.core.ports.ItemDatabase;
+import edu.ankital.hexagonal.items.core.ports.UpdateItem;
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
-
 @Component
-public class UpdateItemDatabaseAdapter implements UpdateItem {
-    @Autowired
+public class UpdateItemFacade implements UpdateItem {
     ItemDatabase itemDatabase;
+    public UpdateItemFacade(ItemDatabase itemDatabase) {
+        this.itemDatabase = itemDatabase;
+    }
 
     @Override
     public Item update(ItemUpdateCommand itemUpdateCommand) {

@@ -7,6 +7,17 @@ public class Item {
     int quantity;
     Map<String, String> metadata;
 
+    public Item(long id, int quantity) {
+        this.id = id;
+        this.quantity = quantity;
+    }
+
+    public Item(long id, int quantity, Map<String, String> metadata) {
+        this.id = id;
+        this.quantity = quantity;
+        this.metadata = metadata;
+    }
+
     public long getId() {
         return id;
     }

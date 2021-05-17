@@ -4,6 +4,11 @@ public class ItemUpdateCommand {
     int quantity;
     long itemId;
 
+    public ItemUpdateCommand(int quantity, long itemId) {
+        this.quantity = quantity;
+        this.itemId = itemId;
+    }
+
     public long getItemId() {
         return itemId;
     }

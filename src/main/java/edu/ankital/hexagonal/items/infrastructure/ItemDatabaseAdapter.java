@@ -8,11 +8,15 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ItemDatabaseAdapter implements ItemDatabase {
-    @Autowired
+
     ItemRepository itemRepository;
 
+    public ItemDatabaseAdapter(ItemRepository itemRepository){
+        this.itemRepository = itemRepository;
+    }
+
     @Override
-    public Item getItemById(long id) {
+    public Item getItemById(Long id) {
         return itemRepository.findById(id).orElseThrow(() ->new ItemNotFoundException("Item with id: "+id+" not present"));
     }
 
