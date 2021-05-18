@@ -1,9 +1,8 @@
 package edu.ankital.hexagonal.items.infrastructure;
 
-import edu.ankital.hexagonal.items.application.model.Item;
 import edu.ankital.hexagonal.items.core.ports.ItemDatabase;
+import edu.ankital.hexagonal.items.infrastructure.entity.Item;
 import edu.ankital.hexagonal.items.infrastructure.exceptions.ItemNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component

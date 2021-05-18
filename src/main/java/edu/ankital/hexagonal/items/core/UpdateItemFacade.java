@@ -1,9 +1,9 @@
 package edu.ankital.hexagonal.items.core;
 
-import edu.ankital.hexagonal.items.application.model.Item;
 import edu.ankital.hexagonal.items.application.model.ItemUpdateCommand;
 import edu.ankital.hexagonal.items.core.ports.ItemDatabase;
 import edu.ankital.hexagonal.items.core.ports.UpdateItem;
+import edu.ankital.hexagonal.items.infrastructure.entity.Item;
 import org.springframework.stereotype.Component;
 
 @Component

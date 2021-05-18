@@ -1,9 +1,8 @@
 package edu.ankital.hexagonal.items.infrastructure;
 
-import edu.ankital.hexagonal.items.application.model.Item;
+import edu.ankital.hexagonal.items.infrastructure.entity.Item;
 import edu.ankital.hexagonal.items.infrastructure.exceptions.ItemNotFoundException;
 import org.junit.jupiter.api.Test;
-import org.mockito.verification.VerificationMode;
 
 import java.util.Optional;
 
@@ -17,7 +16,7 @@ class ItemDatabaseAdapterTest {
     @Test
     void shouldGetItemById() {
         ItemRepository itemRepository = mock(ItemRepository.class);
-        Item mockItem = new Item(1L, 10);
+        Item mockItem = new Item(1L, 10, "some-item");
         when(itemRepository.findById(any())).thenReturn(Optional.of(mockItem));
         ItemDatabaseAdapter itemDatabaseAdapter = new ItemDatabaseAdapter(itemRepository);
 
@@ -42,7 +41,7 @@ class ItemDatabaseAdapterTest {
     @Test
     void shouldCallSaveWithGivenItem() {
         ItemRepository itemRepository = mock(ItemRepository.class);
-        Item mockItem = new Item(1L, 10);
+        Item mockItem = new Item(1L, 10, "some-item");
         when(itemRepository.save(any())).thenReturn(mockItem);
         ItemDatabaseAdapter itemDatabaseAdapter = new ItemDatabaseAdapter(itemRepository);
 

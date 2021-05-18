@@ -3,6 +3,7 @@ package edu.ankital.hexagonal.items.infrastructure.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.util.Map;
 
 @Entity
@@ -12,7 +13,15 @@ public class Item {
     private long id;
     private int quantity;
     private String name;
-    private Map<String, String> metadata;
+
+    public Item() {
+    }
+
+    public Item(long id, int quantity, String name) {
+        this.id = id;
+        this.quantity = quantity;
+        this.name = name;
+    }
 
     public long getId() {
         return id;
@@ -26,7 +35,7 @@ public class Item {
         return name;
     }
 
-    public Map<String, String> getMetadata() {
-        return metadata;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }
