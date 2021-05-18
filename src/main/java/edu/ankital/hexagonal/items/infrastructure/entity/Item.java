@@ -3,16 +3,16 @@ package edu.ankital.hexagonal.items.infrastructure.entity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Transient;
-import java.util.Map;
+import javax.persistence.Table;
 
-@Entity
+@Entity(name = "items")
 public class Item {
     @Id
     @GeneratedValue
     private long id;
     private int quantity;
     private String name;
+    private int qualityAssured = 1;
 
     public Item() {
     }
@@ -37,5 +37,9 @@ public class Item {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public int isQualityAssured() {
+        return qualityAssured;
     }
 }

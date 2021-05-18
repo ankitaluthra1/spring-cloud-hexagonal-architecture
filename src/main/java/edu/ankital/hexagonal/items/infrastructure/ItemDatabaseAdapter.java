@@ -23,4 +23,9 @@ public class ItemDatabaseAdapter implements ItemDatabase {
     public Item saveOrUpdate(Item item) {
         return itemRepository.save(item);
     }
+
+    @Override
+    public void failQualityCheck(String name) {
+        itemRepository.updateQualityAssured(name, 0);
+    }
 }
