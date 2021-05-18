@@ -6,9 +6,9 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 @Component
-public class WebClientAdapter implements QualityControlCheck {
+public class QualityControlCheckWebClientAdapter implements QualityControlCheck {
     WebClient webClient;
-    public WebClientAdapter(WebClient webClient){
+    public QualityControlCheckWebClientAdapter(WebClient webClient){
         this.webClient = webClient;
     }
 
