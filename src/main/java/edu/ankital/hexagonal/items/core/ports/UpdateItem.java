@@ -7,5 +7,5 @@ import reactor.core.publisher.Mono;
 
 public interface UpdateItem {
     public Item update(ItemUpdateCommand itemUpdateCommand);
-    public Mono<Void> update(QualityCheckCommand itemUpdateCommand);
+    public Mono<Boolean> update(QualityCheckCommand itemUpdateCommand);
 }

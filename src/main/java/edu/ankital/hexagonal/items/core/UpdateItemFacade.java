@@ -28,13 +28,13 @@ public class UpdateItemFacade implements UpdateItem {
     }
 
     @Override
-    public Mono<Void> update(QualityCheckCommand itemUpdateCommand) {
+    public Mono<Boolean> update(QualityCheckCommand itemUpdateCommand) {
         Mono<Boolean> qualityCheckFailedItems = qualityControlCheck.check(itemUpdateCommand.getProductName());
         return qualityCheckFailedItems.flatMap(check -> {
             if(!check){
-                return Mono.fromRunnable(() -> itemDatabase.failQualityCheck(itemUpdateCommand.getProductName()));
+                return Mono.fromRunnable(() -> itemDatabase.failQualityCheck(itemUpdateCommand.getProductName())).then(Mono.just(true));
             }
             return Mono.just(true);
-        }).then();
+        });
     }
 }
