@@ -1,19 +1,19 @@
 package edu.ankital.hexagonal.items.application.model;
 
 public class ItemUpdateCommand {
-    int quantity;
-    long itemId;
+    String quantity;
+    String itemId;
 
-    public ItemUpdateCommand(int quantity, long itemId) {
+    public ItemUpdateCommand(String quantity, String itemId) {
         this.quantity = quantity;
         this.itemId = itemId;
     }
 
-    public long getItemId() {
+    public String getItemId() {
         return itemId;
     }
 
-    public int getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 }

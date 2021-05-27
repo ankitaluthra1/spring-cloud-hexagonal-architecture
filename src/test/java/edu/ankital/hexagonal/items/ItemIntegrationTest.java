@@ -46,7 +46,7 @@ public class ItemIntegrationTest {
         Item entity = new Item(1, 10, "name");
         itemRepository.save(entity);
 
-        ItemUpdateCommand itemUpdateCommand = new ItemUpdateCommand(5, 1);
+        ItemUpdateCommand itemUpdateCommand = new ItemUpdateCommand("5", "1");
         Message<ItemUpdateCommand> message = new GenericMessage<>(itemUpdateCommand);
         inputDestination.send(message);
 

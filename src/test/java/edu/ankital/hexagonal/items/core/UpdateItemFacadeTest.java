@@ -1,13 +1,11 @@
 package edu.ankital.hexagonal.items.core;
 
-import edu.ankital.hexagonal.items.application.model.ItemUpdateCommand;
 import edu.ankital.hexagonal.items.application.model.QualityCheckCommand;
+import edu.ankital.hexagonal.items.core.model.ItemUpdateObject;
 import edu.ankital.hexagonal.items.core.ports.QualityControlCheck;
 import edu.ankital.hexagonal.items.infrastructure.ItemDatabaseAdapter;
 import edu.ankital.hexagonal.items.infrastructure.entity.Item;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockitoAnnotations;
 import reactor.core.publisher.Mono;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,10 +23,10 @@ class UpdateItemFacadeTest {
         QualityControlCheck qualityControlCheck = mock(QualityControlCheck.class);
         when(mockItemDatabase.getItemById(any())).thenReturn(inputItem);
         when(mockItemDatabase.saveOrUpdate(any())).thenReturn(outputItem);
-        ItemUpdateCommand command = new ItemUpdateCommand(5, 1);
+        ItemUpdateObject itemUpdateObject = new ItemUpdateObject(5, 1);
         //Act
         UpdateItemFacade updateItemFacade = new UpdateItemFacade(mockItemDatabase, qualityControlCheck);
-        Item result = updateItemFacade.update(command);
+        Item result = updateItemFacade.update(itemUpdateObject);
         //Assert
         assertThat(result).usingRecursiveComparison().isEqualTo(outputItem);
     }
@@ -42,10 +40,10 @@ class UpdateItemFacadeTest {
         QualityControlCheck qualityControlCheck = mock(QualityControlCheck.class);
         when(mockItemDatabase.getItemById(any())).thenReturn(inputItem);
         when(mockItemDatabase.saveOrUpdate(any())).thenReturn(outputItem);
-        ItemUpdateCommand command = new ItemUpdateCommand(5, 1);
+        ItemUpdateObject itemUpdateObject = new ItemUpdateObject(1, 5);
         //Act
         UpdateItemFacade updateItemFacade = new UpdateItemFacade(mockItemDatabase, qualityControlCheck);
-        Item result = updateItemFacade.update(command);
+        Item result = updateItemFacade.update(itemUpdateObject);
         //Assert
         verify(mockItemDatabase).getItemById(1L);
     }
@@ -59,10 +57,10 @@ class UpdateItemFacadeTest {
         QualityControlCheck qualityControlCheck = mock(QualityControlCheck.class);
         when(mockItemDatabase.getItemById(any())).thenReturn(inputItem);
         when(mockItemDatabase.saveOrUpdate(any())).thenReturn(outputItem);
-        ItemUpdateCommand command = new ItemUpdateCommand(5, 1);
+        ItemUpdateObject itemUpdateObject = new ItemUpdateObject(1, 5);
         //Act
         UpdateItemFacade updateItemFacade = new UpdateItemFacade(mockItemDatabase, qualityControlCheck);
-        Item result = updateItemFacade.update(command);
+        Item result = updateItemFacade.update(itemUpdateObject);
         //Assert
         verify(mockItemDatabase).getItemById(1L);
     }

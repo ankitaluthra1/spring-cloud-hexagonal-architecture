@@ -2,6 +2,7 @@ package edu.ankital.hexagonal.items.core;
 
 import edu.ankital.hexagonal.items.application.model.ItemUpdateCommand;
 import edu.ankital.hexagonal.items.application.model.QualityCheckCommand;
+import edu.ankital.hexagonal.items.core.model.ItemUpdateObject;
 import edu.ankital.hexagonal.items.core.ports.ItemDatabase;
 import edu.ankital.hexagonal.items.core.ports.QualityControlCheck;
 import edu.ankital.hexagonal.items.core.ports.UpdateItem;
@@ -20,9 +21,9 @@ public class UpdateItemFacade implements UpdateItem {
     }
 
     @Override
-    public Item update(ItemUpdateCommand itemUpdateCommand) {
-        Item item =  itemDatabase.getItemById(itemUpdateCommand.getItemId());
-        int quantity = item.getQuantity() + itemUpdateCommand.getQuantity();
+    public Item update(ItemUpdateObject itemUpdateObject) {
+        Item item =  itemDatabase.getItemById(itemUpdateObject.getItemId());
+        int quantity = item.getQuantity() + itemUpdateObject.getQuantity();
         item.setQuantity(quantity);
         return itemDatabase.saveOrUpdate(item);
     }
