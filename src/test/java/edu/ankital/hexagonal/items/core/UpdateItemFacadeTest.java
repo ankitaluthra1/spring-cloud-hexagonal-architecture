@@ -16,13 +16,8 @@ import static org.mockito.Mockito.*;
 
 class UpdateItemFacadeTest {
 
-    @BeforeEach
-    void setup(){
-        MockitoAnnotations.openMocks(UpdateItemFacadeTest.class);
-    }
-
     @Test
-    void shouldUpdateItemWithGivenCommand() {
+    public void shouldUpdateItemWithGivenCommand() {
         //Arrange
         Item inputItem = new Item(1, 10, "input-item");
         Item outputItem = new Item(1, 15, "output-item");
