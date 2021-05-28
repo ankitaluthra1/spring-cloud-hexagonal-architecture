@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity(name = "items")
-public class Item {
+public class ItemEntity {
     @Id
     @GeneratedValue
     private long id;
@@ -14,10 +14,10 @@ public class Item {
     private String name;
     private int qualityAssured = 1;
 
-    public Item() {
+    public ItemEntity() {
     }
 
-    public Item(long id, int quantity, String name) {
+    public ItemEntity(long id, int quantity, String name) {
         this.id = id;
         this.quantity = quantity;
         this.name = name;

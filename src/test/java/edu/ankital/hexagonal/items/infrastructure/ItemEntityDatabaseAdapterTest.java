@@ -1,6 +1,6 @@
 package edu.ankital.hexagonal.items.infrastructure;
 
-import edu.ankital.hexagonal.items.infrastructure.entity.Item;
+import edu.ankital.hexagonal.items.infrastructure.entity.ItemEntity;
 import edu.ankital.hexagonal.items.infrastructure.exceptions.ItemNotFoundException;
 import org.junit.jupiter.api.Test;
 
@@ -11,18 +11,18 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-class ItemDatabaseAdapterTest {
+class ItemEntityDatabaseAdapterTest {
 
     @Test
     void shouldGetItemById() {
         ItemRepository itemRepository = mock(ItemRepository.class);
-        Item mockItem = new Item(1L, 10, "some-item");
-        when(itemRepository.findById(any())).thenReturn(Optional.of(mockItem));
+        ItemEntity mockItemEntity = new ItemEntity(1L, 10, "some-item");
+        when(itemRepository.findById(any())).thenReturn(Optional.of(mockItemEntity));
         ItemDatabaseAdapter itemDatabaseAdapter = new ItemDatabaseAdapter(itemRepository);
 
-        Item result = itemDatabaseAdapter.getItemById(1L);
+        ItemEntity result = itemDatabaseAdapter.getItemById(1L);
 
-        assertThat(result).usingRecursiveComparison().isEqualTo(mockItem);
+        assertThat(result).usingRecursiveComparison().isEqualTo(mockItemEntity);
     }
 
     @Test
@@ -41,13 +41,13 @@ class ItemDatabaseAdapterTest {
     @Test
     void shouldCallSaveWithGivenItem() {
         ItemRepository itemRepository = mock(ItemRepository.class);
-        Item mockItem = new Item(1L, 10, "some-item");
-        when(itemRepository.save(any())).thenReturn(mockItem);
+        ItemEntity mockItemEntity = new ItemEntity(1L, 10, "some-item");
+        when(itemRepository.save(any())).thenReturn(mockItemEntity);
         ItemDatabaseAdapter itemDatabaseAdapter = new ItemDatabaseAdapter(itemRepository);
 
-       itemDatabaseAdapter.saveOrUpdate(mockItem);
+       itemDatabaseAdapter.saveOrUpdate(mockItemEntity);
 
-       verify(itemRepository).save(mockItem);
+       verify(itemRepository).save(mockItemEntity);
 
     }
 }

@@ -1,10 +1,11 @@
 package edu.ankital.hexagonal.items.core;
 
 import edu.ankital.hexagonal.items.application.model.QualityCheckCommand;
+import edu.ankital.hexagonal.items.core.model.Item;
 import edu.ankital.hexagonal.items.core.model.ItemUpdateObject;
 import edu.ankital.hexagonal.items.core.ports.QualityControlCheck;
 import edu.ankital.hexagonal.items.infrastructure.ItemDatabaseAdapter;
-import edu.ankital.hexagonal.items.infrastructure.entity.Item;
+import edu.ankital.hexagonal.items.infrastructure.entity.ItemEntity;
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Mono;
 
@@ -12,38 +13,39 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-class UpdateItemFacadeTest {
+class UpdateItemEntityFacadeTest {
 
     @Test
     public void shouldUpdateItemWithGivenCommand() {
         //Arrange
-        Item inputItem = new Item(1, 10, "input-item");
-        Item outputItem = new Item(1, 15, "output-item");
+        ItemEntity inputItemEntity = new ItemEntity(1, 10, "input-item");
+        ItemEntity outputItemEntity = new ItemEntity(1, 15, "output-item");
         ItemDatabaseAdapter mockItemDatabase = mock(ItemDatabaseAdapter.class);
         QualityControlCheck qualityControlCheck = mock(QualityControlCheck.class);
-        when(mockItemDatabase.getItemById(any())).thenReturn(inputItem);
-        when(mockItemDatabase.saveOrUpdate(any())).thenReturn(outputItem);
-        ItemUpdateObject itemUpdateObject = new ItemUpdateObject(5, 1);
+        when(mockItemDatabase.getItemById(any())).thenReturn(inputItemEntity);
+        when(mockItemDatabase.saveOrUpdate(any())).thenReturn(outputItemEntity);
+        ItemUpdateObject itemUpdateObject = new ItemUpdateObject(1, 5);
         //Act
         UpdateItemFacade updateItemFacade = new UpdateItemFacade(mockItemDatabase, qualityControlCheck);
         Item result = updateItemFacade.update(itemUpdateObject);
         //Assert
-        assertThat(result).usingRecursiveComparison().isEqualTo(outputItem);
+        assertThat(result.getId()).isEqualTo(1);
+        assertThat(result.getQuantity()).isEqualTo(15);
     }
 
     @Test
     void shouldCallGetItemByIdWithGivenId() {
         //Arrange
-        Item inputItem = new Item(1, 10, "input-item");
-        Item outputItem = new Item(1, 15, "output-itrm");
+        ItemEntity inputItemEntity = new ItemEntity(1, 10, "input-item");
+        ItemEntity outputItemEntity = new ItemEntity(1, 15, "output-itrm");
         ItemDatabaseAdapter mockItemDatabase = mock(ItemDatabaseAdapter.class);
         QualityControlCheck qualityControlCheck = mock(QualityControlCheck.class);
-        when(mockItemDatabase.getItemById(any())).thenReturn(inputItem);
-        when(mockItemDatabase.saveOrUpdate(any())).thenReturn(outputItem);
+        when(mockItemDatabase.getItemById(any())).thenReturn(inputItemEntity);
+        when(mockItemDatabase.saveOrUpdate(any())).thenReturn(outputItemEntity);
         ItemUpdateObject itemUpdateObject = new ItemUpdateObject(1, 5);
         //Act
         UpdateItemFacade updateItemFacade = new UpdateItemFacade(mockItemDatabase, qualityControlCheck);
-        Item result = updateItemFacade.update(itemUpdateObject);
+        updateItemFacade.update(itemUpdateObject);
         //Assert
         verify(mockItemDatabase).getItemById(1L);
     }
@@ -51,16 +53,16 @@ class UpdateItemFacadeTest {
     @Test
     void shouldCallSaveOrUpdateItemWithGiven() {
         //Arrange
-        Item inputItem = new Item(1, 10, "input-item");
-        Item outputItem = new Item(1, 15, "output-item");
+        ItemEntity inputItemEntity = new ItemEntity(1, 10, "input-item");
+        ItemEntity outputItemEntity = new ItemEntity(1, 15, "output-item");
         ItemDatabaseAdapter mockItemDatabase = mock(ItemDatabaseAdapter.class);
         QualityControlCheck qualityControlCheck = mock(QualityControlCheck.class);
-        when(mockItemDatabase.getItemById(any())).thenReturn(inputItem);
-        when(mockItemDatabase.saveOrUpdate(any())).thenReturn(outputItem);
+        when(mockItemDatabase.getItemById(any())).thenReturn(inputItemEntity);
+        when(mockItemDatabase.saveOrUpdate(any())).thenReturn(outputItemEntity);
         ItemUpdateObject itemUpdateObject = new ItemUpdateObject(1, 5);
         //Act
         UpdateItemFacade updateItemFacade = new UpdateItemFacade(mockItemDatabase, qualityControlCheck);
-        Item result = updateItemFacade.update(itemUpdateObject);
+        updateItemFacade.update(itemUpdateObject);
         //Assert
         verify(mockItemDatabase).getItemById(1L);
     }

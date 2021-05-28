@@ -1,12 +1,12 @@
 package edu.ankital.hexagonal.items.core;
 
-import edu.ankital.hexagonal.items.application.model.ItemUpdateCommand;
 import edu.ankital.hexagonal.items.application.model.QualityCheckCommand;
+import edu.ankital.hexagonal.items.core.model.Item;
 import edu.ankital.hexagonal.items.core.model.ItemUpdateObject;
 import edu.ankital.hexagonal.items.core.ports.ItemDatabase;
 import edu.ankital.hexagonal.items.core.ports.QualityControlCheck;
 import edu.ankital.hexagonal.items.core.ports.UpdateItem;
-import edu.ankital.hexagonal.items.infrastructure.entity.Item;
+import edu.ankital.hexagonal.items.infrastructure.entity.ItemEntity;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
@@ -22,10 +22,10 @@ public class UpdateItemFacade implements UpdateItem {
 
     @Override
     public Item update(ItemUpdateObject itemUpdateObject) {
-        Item item =  itemDatabase.getItemById(itemUpdateObject.getItemId());
-        int quantity = item.getQuantity() + itemUpdateObject.getQuantity();
-        item.setQuantity(quantity);
-        return itemDatabase.saveOrUpdate(item);
+        ItemEntity itemEntity =  itemDatabase.getItemById(itemUpdateObject.getItemId());
+        int quantity = itemEntity.getQuantity() + itemUpdateObject.getQuantity();
+        itemEntity.setQuantity(quantity);
+        return Item.from(itemDatabase.saveOrUpdate(itemEntity));
     }
 
     @Override

@@ -1,10 +1,10 @@
 package edu.ankital.hexagonal.items.core.ports;
 
 
-import edu.ankital.hexagonal.items.infrastructure.entity.Item;
+import edu.ankital.hexagonal.items.infrastructure.entity.ItemEntity;
 
 public interface ItemDatabase {
-    Item getItemById(Long id);
-    Item saveOrUpdate(Item item);
+    ItemEntity getItemById(Long id);
+    ItemEntity saveOrUpdate(ItemEntity itemEntity);
     void failQualityCheck(String name);
 }
